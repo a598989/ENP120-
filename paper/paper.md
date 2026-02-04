@@ -6,7 +6,7 @@ tags:
   - photovoltaics
   - renewable energy
 authors:
-  - name: Kevin S. Anderson
+  - name: Kevin S. Anderson[^*]
     orcid: 0000-0002-1166-7957
     affiliation: 1
   - name: Clifford W. Hansen
@@ -15,12 +15,12 @@ authors:
   - name: William F. Holmgren
     orcid: 0000-0001-6218-9767
     affiliation: 2
-  - name: Mark A. Mikofski
-    orcid: 0000-0001-8001-8582
-    affiliation: 2
   - name: Adam R. Jensen
     orcid: 0000-0002-5554-9856
     affiliation: 3
+  - name: Mark A. Mikofski
+    orcid: 0000-0001-8001-8582
+    affiliation: 2
   - name: Anton Driesse
     orcid: 0000-0003-3023-2155
     affiliation: 4
@@ -38,6 +38,7 @@ date: 13 September 2023
 bibliography: paper.bib
 ---
 
+[^*]: Author order is sorted by code commits to the project's main branch from 2018-09-07 to 2023-12-18.
 
 # Summary
 
@@ -73,26 +74,42 @@ of the global solar energy industry demands correspondingly more
 capable models.  Per the United States Department of Energy,
 "the importance of accurate modeling is hard to overstate" [@seto2022].
 
-Compared with other PV modeling tools, pvlib python stands out in several
+Compared with other modern PV system modeling tools, pvlib python stands out in several
 key aspects.  One is its toolbox design, providing the user a
-level of flexibility and customization beyond that of other tools.  Rather than organizing
-the user interface around pre-built modeling workflows, pvlib python
-makes the individual "building blocks" of PV performance models accessible to
-the user.  This allows the user to assemble their own model workflows, including
+level of flexibility and customization beyond that of other tools.  Other PV
+system modeling tools like SAM [@Gilman2018], PVsyst [@Mermoud1994], 
+SolarFarmer [@Mikofski2018], PlantPredict [@Passow2017], and 
+CASSYS [@Pai2016]—to name a few software tools with comparable breadth of 
+modeling capability—organize the user interface around pre-built modeling workflows. 
+Instead, pvlib python makes the individual "building blocks" of PV system performance 
+models accessible to the user.
+This allows the user to assemble their own model workflows, including
 the ability of incorporating custom modeling steps.  This flexibility
-is essential for applications in both academia and industry.
+is essential for applications in both academia and industry.  To our knowledge,
+the only other PV system modeling software with such a toolbox design is the
+original MATLAB version of pvlib [@Andrews2014].  pvlib python began as
+a translation of that code base and has since surpassed it in terms of
+capability, community uptake, and development attention.
 
-Another key aspect of pvlib python is that it is used via
-a general-purpose programming language (Python), which
+Another key aspect of pvlib python is that it is both implemented and operated
+with a general-purpose programming language (Python), which
 allows pvlib python functions to be combined with capabilities in other Python packages,
 such as database query, data manipulation, numerical optimization,
-plotting, and reporting packages.
+plotting, and reporting packages.  In contrast, most other PV system modeling
+tools are used via some form of GUI.  Some of these other tools are also accessible
+from Python via web APIs or wrapper libraries [@pysam], but these
+"black box" interfaces offer only limited ability to combine the PV models
+with functionality from other Python packages.
 
 A final key aspect of pvlib python is its open peer review approach and
 foundation on published scientific research, allowing it to be developed by
 a decentralized and diverse community of PV researchers and practitioners
 without compromising its focus on transparent and reliable model
-implementations.
+implementations.  This is in contrast to the inherent opaqueness of closed-source
+commercial software, which prevents users from inspecting the source code
+to ensure a model implementation's validity or traceability to a reference.
+It is also in contrast to other open-source PV projects, where code review
+and contributions typically come from a single institution.
 
 These key aspects, along with sustained contributions from a passionate and
 committed community, have led to pvlib python's widespread adoption across the PV
@@ -123,8 +140,7 @@ a capability enhancement of particular note is the inclusion of models for simul
 irradiance on the rear side of PV modules.
 Other notable additions include methods of fitting empirical PV performance models
 to measurements and models for performance loss mechanisms like soiling and snow
-coverage.  
-\autoref{fig:functions-comparison} summarizes the number of models (or functions)
+coverage. \autoref{fig:functions-comparison} summarizes the number of models (or functions)
 per module for pvlib python versions 0.6.0 (released 2018-09-17) and 0.10.1
 (released 2023-07-03), showing a substantial capability expansion over the
 last five years.
@@ -137,11 +153,11 @@ the complexity of emerging system designs, including heterogeneous systems whose
 subsystems differ in mounting or electrical configuration and systems that require
 custom orientation/tracking models.
 
-Third, the creation of `pvlib.iotools`, a sub-package for fetching and importing
+Third, a new subpackage `pvlib.iotools` has been created for fetching and importing
 datasets relevant to PV modeling.  These functions provide a standardized
 interface for reading data files in various complex data formats, offering
-conveniences like optionally standardizing the dataset variable names and units
-to pvlib's conventions [@pvlibiotools].  As of version 0.10.1, `pvlib.iotools` contains
+conveniences like the option to standardize dataset variable names and units
+to pvlib's conventions [@Jensen2023].  As of version 0.10.1, `pvlib.iotools` contains
 functions to download data from over ten online data providers,
 plus file reading/parsing functions for a dozen solar resource file formats.
 
@@ -160,7 +176,7 @@ the community as a whole.
 
 First, we examine contributors to pvlib python's code repository.  The
 project's use of version control software enables easy quantification of
-repository additions (to code, documentation, tests, etc) over time.  The
+repository additions (to code, documentation, tests, etc.) over time.  The
 project's repository currently comprises contributions from over 100 people
 spanning industry, academia, and government research institutions.
 \autoref{fig:community} (left) shows the number of unique repository
@@ -212,7 +228,7 @@ funding sources, including:
 
 - The U.S. Department of Energy’s Solar Energy Technology Office, through
   the PV Performance Modeling Collaborative (PVPMC) and other projects
-- The Danish Energy Agency through grant nos. 64020-1082 and 134232-510237
+- The Danish Energy Agency through grant nos. 134223-496801 and 134232-510237
 - NumFOCUS's Small Development Grant program
 - Google's Summer of Code program
 
